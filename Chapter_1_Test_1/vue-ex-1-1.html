@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="text/javascript" src="../vue/js/vue.js"></script> -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>实训1</title>
+</head>
+<body>
+    <div id="vue">
+        <h3>欢迎新生入学！！</h3>
+        <p>我的班级:
+            <select v-model="selection">
+                <option value="" disabled>请选择</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </p>
+    </div>
+    <!-- Vue2方式 -->
+    <!-- <script type="text/javascript">
+          var vm = new Vue({
+             el:'#vue',  //挂载在id为vue的元素上
+             data:{selection:0}
+         }) 
+    </script> --> 
+    <!-- Vue3方式 
+        通过CDN使用：1.使用全局构建版本；2.使用 ES 模块构建版本；3.启用 Import maps；
+        这里使用的1方案；
+    -->
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data(){
+                return {
+                    selection:0
+                }
+            }
+        }).mount('#vue')
+    </script>
+</body>
+</html>
