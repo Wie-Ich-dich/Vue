@@ -10,8 +10,8 @@
     3.定义Vue实例，并绑定相应节点；
     4.进行调试、查看页面效果；
 
-#案例基本布局
-    1.引入Vue.js文件：
+#案例基本实现
+    1.引入Vue.js文件：（Vue2方式）
 <script type="text/javascript" src="../vue/js/vue.js"></script>
 
     2.页面布局：
