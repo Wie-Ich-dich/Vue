@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <title>实训2</title>
+    <style>
+        .ipt {
+            width: 150px;
+            height: 25px;
+            border-radius: 4px;
+            margin: 2.5px auto;
+        }
+        .btn {
+            margin: 0px auto;
+            width: 150px;
+        }
+        .fields {
+            margin: 0px auto;
+            padding: 10px;
+            width: 600px;
+            border: 1px double #008000;
+        }
+        .tbl {
+            /* 表格的border属性只能在标签border属性中定义 */
+            width: 626px;
+            border-collapse: collapse;
+            text-align: center;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="vue">
+        <fieldset class="fields">
+            <legend align="center">邮购商品业务</legend>
+            客户姓名：<input class="ipt" type="text" v-model="name">
+            单价：<input class="ipt" type="text" v-model="price"></br>
+            数量：<input class="ipt" type="text" v-model="count">
+            购买价：<input class="ipt" type="text" v-model="total" disabled></br>
+            运费：<span style="display: inline-block;width: 100px;height: 25px;">{{freight}}</span>
+            总价：<input class="ipt" type="text" v-model="sum" disabled></br>
+            <span>注：购买价 >= 100元免运费</span></br>
+            <button class="btn" type="button" @click="add">记入流水</button>
+            <button class="btn" type="button" @click="clear">重置</button>
+        </fieldset>
+        <table border="1" bordercolor="#008000" class="tbl">
+            <caption>销售流水帐</caption>
+            <tr>
+                <th>业务时间</th>
+                <th>客户姓名</th>
+                <th>购买价</th>
+                <th>运费</th>
+                <th>总金额</th>           
+            </tr>
+            <tr v-for="business in businesses" key="business.name">
+                <td>{{business.dateTime | dateFormat}}</td>
+                <td>{{business.name}}</td>
+                <td>{{business.totalAll}}</td>
+                <td>{{business.freight}}</td>
+                <td>{{business.sumTotal}}</td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:'#vue',
+            data:{
+                name:'',
+                price:'',
+                count:'',
+                total:'',
+                sum:'',
+                businesses:[]
+            },
+            computed:{
+                freight(){
+                    if(!this.total | this.total.parseInt >= 100)
+                        return 0;
+                    return 10;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
