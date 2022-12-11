@@ -55,3 +55,80 @@
     </table>
 </div>
     3.Vue实例的定义：
+<script type="text/javascript">
+    // 全局方式定义dateormat过滤器
+    Vue.filter('dateFormat', dateT=>{
+        var dT=new Date(dateT);
+                
+        var yyyy=dT.getFullYear();
+        var mm=dT.getMonth()+1;
+        var dd=dT.getDate();
+        var hhmmss=dT.toLocaleTimeString();
+        return `${yyyy}-${mm}-${dd} ${hhmmss}`;
+    });
+    var vm = new Vue({
+        el:'#vue',
+        data:{
+            name:'',
+            price:0,
+            count:0,
+            businesses:[]
+        },
+        computed:{
+            freight(){
+                if(!this.total | this.total >= 100)
+                    return 0;
+                return 10;
+            },
+            total: function(){
+                if(this.price && this.count)
+                    return this.price * this.count;
+                return 0;
+            },
+            sum(){
+                return this.total + this.freight;
+            }
+        },
+        methods:{
+            add(){
+                if(this.name.trim()){
+                    // console.log('ok');
+                    this.businesses.push({
+                        id:this.businesses.length,
+                        dateTime:Date(),
+                        name:this.name,
+                        totalAll:this.total,
+                        freight:this.freight,
+                        sumTotal:this.sum
+                    });
+                    this.clear();
+                }else{
+                    alert('请输入相关信息！！')
+                }
+                    
+            },
+            clear(){
+                this.name='',
+                this.price=0,
+                this.count=0
+            }
+        }/* ,
+        // 私有方式定义过滤器
+        filters:{
+            dateFormat(dateT){
+                var dT=new Date(dateT);
+                
+                var yyyy=dT.getFullYear();
+                var mm=dT.getMonth()+1;
+                var dd=dT.getDate();
+                var hhmmss=dT.toLocaleTimeString();
+                return `${yyyy}-${mm}-${dd} ${hhmmss}`;
+
+            }
+        } */
+    })
+</script>
+
+#案例难点
+    1.table样式的设置；
+    2.date日期格式过滤器的构建算法；

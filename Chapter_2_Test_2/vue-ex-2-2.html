@@ -55,7 +55,7 @@
                 <th>运费</th>
                 <th>总金额</th>           
             </tr>
-            <tr v-for="business in businesses" key="business.name">
+            <tr v-for="business in businesses" :key="business.id">
                 <td>{{business.dateTime | dateFormat}}</td>
                 <td>{{business.name}}</td>
                 <td>{{business.totalAll}}</td>
@@ -65,23 +65,76 @@
         </table>
     </div>
     <script type="text/javascript">
+        // 全局方式定义dateormat过滤器
+        Vue.filter('dateFormat', dateT=>{
+            var dT=new Date(dateT);
+                    
+            var yyyy=dT.getFullYear();
+            var mm=dT.getMonth()+1;
+            var dd=dT.getDate();
+            var hhmmss=dT.toLocaleTimeString();
+            return `${yyyy}-${mm}-${dd} ${hhmmss}`;
+        });
         var vm = new Vue({
             el:'#vue',
             data:{
                 name:'',
-                price:'',
-                count:'',
-                total:'',
-                sum:'',
+                price:0,
+                count:0,
                 businesses:[]
             },
             computed:{
                 freight(){
-                    if(!this.total | this.total.parseInt >= 100)
+                    if(!this.total | this.total >= 100)
                         return 0;
                     return 10;
+                },
+                total: function(){
+                    if(this.price && this.count)
+                        return this.price * this.count;
+                    return 0;
+                },
+                sum(){
+                    return this.total + this.freight;
                 }
-            }
+            },
+            methods:{
+                add(){
+                    if(this.name.trim()){
+                        // console.log('ok');
+                        this.businesses.push({
+                            id:this.businesses.length,
+                            dateTime:Date(),
+                            name:this.name,
+                            totalAll:this.total,
+                            freight:this.freight,
+                            sumTotal:this.sum
+                        });
+                        this.clear();
+                    }else{
+                        alert('请输入相关信息！！')
+                    }
+                        
+                },
+                clear(){
+                    this.name='',
+                    this.price=0,
+                    this.count=0
+                }
+            }/* ,
+            // 私有方式定义过滤器
+            filters:{
+                dateFormat(dateT){
+                    var dT=new Date(dateT);
+                    
+                    var yyyy=dT.getFullYear();
+                    var mm=dT.getMonth()+1;
+                    var dd=dT.getDate();
+                    var hhmmss=dT.toLocaleTimeString();
+                    return `${yyyy}-${mm}-${dd} ${hhmmss}`;
+
+                }
+            } */
         })
     </script>
 </body>
