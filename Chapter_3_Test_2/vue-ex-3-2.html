@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <title>实训2</title>
+</head>
+<body>
+    <div id="vue1" :style="comStyle">
+        <h3>英文字母转换为带下划线的全大写格式</h3>
+        <p>原始字符串：{{text}}</p>
+        <div v-line="'underline'" v-upper-text="text">111</div>
+    </div>
+    <div id="vue2" :style="comStyle">
+        <h3>英文字母转换为带上划线的全小写格式</h3>
+        <p>原始字符串：{{text}}</p>
+        <div v-line="'overline'" v-lower-text="text">111</div>
+    </div>
+    <script type="text/javascript">
+        Vue.directive('line',{
+            bind:function(el, binding){
+                el.style.textDecoration=binding.value;
+            }
+        });
+        var vm1=new Vue({
+            el:'#vue1',
+            data:{
+                text:'Vue.js Components Fundamentals!',
+                comStyle:{
+                    width:'450px',
+                    height:'150px',
+                    border:'2px dashed #333333'
+                }
+            },
+            directives:{
+                upperText:function(el,binding){
+                    console.log(el);
+                    console.log(binding);
+                    el.textContent=binding.value.toUpperCase();
+                }
+            }
+        });
+        var vm2=new Vue({
+            el:'#vue2',
+            data:{
+                text:'Vue.js is very Good!(innerText)',
+                comStyle:{
+                    width:'450px',
+                    height:'150px',
+                    backgroundColor:'#777777'
+                }
+            },
+            directives:{
+                'lower-text':function(el,binding){
+                    console.log(el);
+                    console.log(binding);
+                    el.textContent=binding.value.toLowerCase();
+                }          
+            }
+        });
+    </script>
+</body>
+</html>
