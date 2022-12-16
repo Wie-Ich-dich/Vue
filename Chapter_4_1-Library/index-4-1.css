@@ -1,0 +1,52 @@
+#vue {
+    border: 2px dashed #55ed89;
+    width: 950px;
+    margin: 0px auto;
+}
+
+.title {
+    text-align: center;
+    color: #0033CC;
+    padding: 15px;
+    background-color: #AFAFAF;
+    font-size: 28px;
+    height: 58px;
+}
+
+input[type="text"] {
+    border-radius: 8px;
+    width: 140px;
+    height: 35px;
+    border: 1px dashed #008000;
+    padding: 0px 5px;
+}
+
+input[type="button"], .tableBtn {
+    border-radius: 8px;
+    width: 80px;
+    height: 35px;
+    background-color: #008000;
+    color: white;
+}
+
+.tableBtn {
+    text-decoration: none;
+    padding: 8px 10px;
+    margin: 0px 5px;
+}
+
+input[type="button"]:hover, .tableBtn:hover {
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 950px;
+}
+.tr1 {
+    height: 50px;
+    padding: 5px auto;
+}
+
+
