@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <link rel="stylesheet" href="./index-4-2.css">
+    <title>MyToDos</title>
+</head>
+<body>
+    <div class="container" id="vue">
+        <h3>MyToDos</h3>
+        <fieldset>
+            <legend>待办事项管理助手</legend>
+            <input type="text" placeholder="请输入待办事项"><input type="button" value="添加">
+            <div id="itemsField">
+                <ol>
+                    <li v-for="(item,index) in items">
+                        <input type="checkbox" v-model="item.state">
+                        <span :class="{'itemClass','itemDone':item.state">{{item.content}}</span>
+                        <span class="cancelClass" @click="delOne(index)">×</span>
+                    </li>
+                </ol>
+                <span v-show="true">共有{{items.length}}项</span>
+                <span v-show="false">剩余{{}}项</span>
+                <button @click="">全部</button>
+                <button @click="">待完成</button>
+                <button @click="">已完成</button>
+                <button v-show="true" @click="clearDone">清除完成</button>
+            </div>
+        </fieldset>
+    </div>
+    <script type="text/javascript" src="./index-4-2.js"></script>
+</body>
+</html>
