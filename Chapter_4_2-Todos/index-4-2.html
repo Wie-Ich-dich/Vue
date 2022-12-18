@@ -13,21 +13,22 @@
         <h3>MyToDos</h3>
         <fieldset>
             <legend>待办事项管理助手</legend>
-            <input type="text" placeholder="请输入待办事项"><input type="button" value="添加">
+            <input type="text" placeholder="请输入待办事项" v-model.trim.lazy="newTodo"><input type="button" value="添加" @click="addItem">
             <div id="itemsField">
                 <ol>
-                    <li v-for="(item,index) in items">
-                        <input type="checkbox" v-model="item.state">
-                        <span :class="{'itemClass','itemDone':item.state">{{item.content}}</span>
-                        <span class="cancelClass" @click="delOne(index)">×</span>
+                    <li v-for="item in itemArray" :key="item.id">
+                        <!-- 这里绑定的是计算属性itemArray但实际上，修改它的值原items对象数组也会发生改变； -->
+                        <input type="checkbox" @click="item.state=!item.state" :checked="!item.state">
+                        <span :class="{'itemClass':true,'itemDone':!item.state}">{{item.content}}</span>
+                        <span class="cancelClass" @click="delOne(item.id)">×</span>
                     </li>
                 </ol>
-                <span v-show="true">共有{{items.length}}项</span>
-                <span v-show="false">剩余{{}}项</span>
-                <button @click="">全部</button>
-                <button @click="">待完成</button>
-                <button @click="">已完成</button>
-                <button v-show="true" @click="clearDone">清除完成</button>
+                <span v-show="notDoneCount==total | itemState!=0">共有{{itemArray.length}}项</span>
+                <span v-show="itemState==0 & notDoneCount!=total">剩余{{notDoneCount}}项</span>
+                <button @click="itemState=0">全部</button>
+                <button @click="itemState=1">待完成</button>
+                <button @click="itemState=2">已完成</button>
+                <button v-show="!(itemState==1 | notDoneCount==total)" @click="clearDone">清除完成</button>
             </div>
         </fieldset>
     </div>
