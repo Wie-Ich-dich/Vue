@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <title>实训1</title>
+    <style>
+        #app {
+            margin: 0 auto;
+            width: 800px;
+            height: 350px;
+            border: 15px solid #CACACA;
+            text-align: center;
+        }
+        .childGirl {
+            border: 1px dotted black;
+            height: 200px;
+            width: 350px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .childBoy {
+            border: 1px dashed black;
+            height: 200px;
+            width: 350px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+        h1 {
+            margin: 15px 0px;
+        }
+        input, button {
+            height: 24px;
+            border-radius: 10px;
+            border: 1px dashed #0000EE;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>友谊聊吧</h2>
+        <hr size="2" color="#CACACA">
+        <div class="container">
+            <girl></girl>
+            <boy></boy>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        var bus=new Vue();
+        var girlComponent={
+            template:'<div class="childGirl"> \
+                        <h1>我是女生</h1> \
+                        <input type="text" placeholder="请发言" v-model.trim.lazy="girlInput"><button @click="sendToBoy">发送信息</button> \
+                        <textarea id="girl" cols="40" rows="5" disabled>{{chatHistory}}</textarea> \
+                    </div>',
+            data(){
+                return {
+                    chatHistory:'',
+                    girlInput:''
+                }
+            },
+            methods:{
+                sendToBoy(){
+                    bus.$emit('msgToBoy',this.girlInput);
+                    this.girlInput='';
+                }
+            },
+            created(){
+                // 注意这里要使用箭头函数才可以直接使用this
+                bus.$on('msgToGirl',(msg)=>{
+                    let txt='['+new Date().toLocaleTimeString()+']：'+msg;
+                    this.chatHistory=this.chatHistory+txt+'\n';
+                });
+            }
+        };
+        var boyComponent=Vue.extend({
+            template:'<div class="childBoy"> \
+                        <h1>我是男生</h1> \
+                        <input type="text" placeholder="请发言" v-model.trim.lazy="boyInput"><button @click="sendToGirl">发送信息</button> \
+                        <textarea id="boy" cols="40" rows="5" disabled>{{chatHistory}}</textarea> \
+                    </div>',
+            data(){
+                return {
+                    boyInput:'',
+                    chatHistory:''
+                }
+            },
+            methods:{
+                sendToGirl(){
+                    bus.$emit('msgToGirl',this.boyInput);
+                    this.boyInput='';
+                }
+            },
+            created(){
+                bus.$on('msgToBoy',(msg)=>{
+                    let txt='['+new Date().toLocaleTimeString()+']：'+msg;
+                    this.chatHistory=this.chatHistory+txt+'\n';
+                });
+            }
+        });
+        /* // 全局形式声明组件
+        Vue.component('boy',boyComponent);
+        Vue.component('girl',girlComponent); */
+
+        var vm=new Vue({
+            el:'#app',
+            // 私有形式声明组件
+            components:{
+                'boy':boyComponent,
+                'girl':girlComponent
+            }
+        });
+    </script>
+</body>
+</html>
