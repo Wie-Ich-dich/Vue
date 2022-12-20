@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <title>页面布局调整和换肤</title>
+    <style>
+        button {
+            height: 35px;
+            width: 120px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .header {
+            margin: 0px 10px;
+            height: 50px;
+            background-color: #FAFBFC;
+        }
+        .content {
+            height: 600px;
+            background-color: #CECECE;
+            margin: 0px 10px 0px 10px;
+        }
+        .footer {
+            height: 30px;
+            background-color: #E3E3E3;
+            margin: 0px 10px;
+        }
+        h3 {
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-slot :bgcolor="bgColor">
+            <template v-slot:[slot1]><h3 style="text-align: center;">这是新的头部</h3></template>
+            <template v-slot:[slot2]><h3 style="text-align: center;">这是新的中间</h3></template>
+            <template v-slot:[slot3]><h3 style="text-align: center;">这是新的尾部</h3></template>
+        </my-slot>
+        <div style="text-align:center;padding:10px;">
+            <button @click="updateContent">更新内容</button>
+            <button @click="initContent">还原内容</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var componentA=Vue.extend({
+            props:['bgcolor'],
+            template:'<div> \
+                    <div class="header" :style="{backgroundColor:bgcolor.header}"><slot name="header">这是默认的头部</slot></div> \
+                    <div class="content" :style="{backgroundColor:bgcolor.content}"><slot name="content">这是默认的中间</slot></div> \
+                    <div class="footer" :style="{backgroundColor:bgcolor.footer}"><slot name="footer">这是默认的尾部</slot></div> \
+                    </div>'
+        });
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                bgColor:{
+                    header:'',
+                    content:'',
+                    footer:''
+                },
+                slot1:'',
+                slot2:'',
+                slot3:''
+            },
+            components:{
+                'my-slot':componentA
+            },
+            methods:{
+                updateContent(){
+                    this.slot1='header';
+                    this.slot2='content';
+                    this.slot3='footer';
+                    this.bgColor.header='#55FF00';
+                    this.bgColor.content='#FF55FF';
+                    this.bgColor.footer='#FBEB06';
+                },
+                initContent(){
+                    this.slot1='';
+                    this.slot2='';
+                    this.slot3='';
+                    this.bgColor.header='#FAFBFC';
+                    this.bgColor.content='#CECECE';
+                    this.bgColor.footer='#E3E3E3';
+                }
+            }
+        })
+    </script>
+</body>
+</html>
