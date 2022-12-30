@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../vue/js/vue.js"></script>
+    <title>多元素过渡</title>
+</head>
+<body>
+    <div>
+        <h3>过渡模式（进入和离开同时发生）</h3>
+        <div id="app1">
+            <transition name="no-mode-fade">
+                <button v-if="on" key="on" @click="on=false">on</button>
+                <button v-else key="off" @click="on=true">off</button>
+            </transition>
+        </div>
+        <script>
+            var vm=new Vue({
+                el:'#app1',
+                data:{
+                    on:false
+                }
+            })
+        </script>
+        <style>
+            .no-mode-fade-enter-active, .no-mode-fade-leave-active {
+                transition: opacity 0.5s;
+            }
+            .no-mode-fade-enter, .no-mode-fade-leave-to {
+                opacity: 0;
+            }
+        </style>
+    </div>
+    <div>
+        <h3>过渡模式（元素绝对定位在彼此之上）</h3>
+        <div id="app2">
+            <div class="no-mode-absolute-demo-wrapper">
+                <transition name="no-mode-absolute-fade">
+                    <button v-if="on" key="on" @click="on=false">on</button>
+                    <button v-else key="off" @click="on=true">off</button>
+                </transition>
+            </div>
+        </div>
+        <script>
+            var vm=new Vue({
+                el:'#app2',
+                data:{
+                    on:false
+                }
+            })
+        </script>
+        <style>
+            .no-mode-absolute-demo-wrapper {
+                position: relative;
+                height: 18px;
+            }
+            .no-mode-absolute-demo-wrapper button {
+                position: absolute;
+            }
+            .no-mode-absolute-fade-enter-active, .no-mode-absolute-fade-leave-active {
+                transition: opacity 0.5s;
+            }
+            .no-mode-absolute-fade-enter, .no-mode-absolute-fade-leave-to {
+                opacity: 0;
+            }
+        </style>
+    </div>
+    <div>
+        <h3>过渡模式（加上translate滑动）</h3>
+        <div id="app3">
+            <div class="no-mode-translate-demo-wrapper">
+                <transition name="no-mode-translate-fade">
+                    <button v-if="on" key="on" @click="on=false">on</button>
+                    <button v-else key="off" @click="on=true">off</button>
+                </transition>
+            </div>
+        </div>
+        <script>
+            var vm=new Vue({
+                el:'#app3',
+                data:{
+                    on:false
+                }
+            })
+        </script>
+        <style>
+            .no-mode-translate-demo-wrapper {
+                position: relative;
+                height: 18px;
+            }
+            .no-mode-translate-demo-wrapper button {
+                position: absolute;
+            }
+            .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
+                transition: all 1s;
+            }
+            .no-mode-translate-fade-enter, .no-mode-translate-fade-leave-to {
+                opacity: 0;
+            }
+            .no-mode-translate-fade-enter {
+                transform:translateX(31px);
+            }
+            .no-mode-translate-fade-leave-active {
+                transform:translateX(-31px);
+            }
+        </style>
+    </div>
+    <div>
+        <h3>过渡模式（out-in模式）</h3>
+        <div id="app4">
+            <transition name="with-mode-fade" mode="out-in">
+                <button v-if="on" key="on" @click="on=false">on</button>
+                <button v-else key="off" @click="on=true">off</button>
+            </transition>
+        </div>
+        <script>
+            var vm=new Vue({
+                el:'#app4',
+                data:{
+                    on:false
+                }
+            })
+        </script>
+        <style>
+            .with-mode-fade-enter-active, .with-mode-fade-leave-active {
+                transition: opacity 0.5s;
+            }
+            .with-mode-fade-enter, .with-mode-fade-leave-to {
+                opacity: 0;
+            }
+        </style>
+    </div>
+    <div>
+        <h3>过渡模式（in-out模式）</h3>
+        <div id="app5">
+            <div class="in-out-translate-demo-wrapper">
+                <transition name="in-out-translate-fade" mode="in-out">
+                    <button v-if="on" key="on" @click="on=false">on</button>
+                    <button v-else key="off" @click="on=true">off</button>
+                </transition>
+            </div>
+        </div>
+        <script>
+            var vm=new Vue({
+                el:'#app5',
+                data:{
+                    on:false
+                }
+            })
+        </script>
+        <style>
+            .in-out-translate-demo-wrapper {
+                position: relative;
+                height: 18px;
+            }
+            .in-out-translate-demo-wrapper button {
+                position: absolute;
+            }
+            .in-out-translate-fade-enter-active, .in-out-translate-fade-leave-active {
+                transition: all 5s;
+            }
+            .in-out-translate-fade-enter, .in-out-translate-fade-leave-to {
+                opacity: 0;
+            }
+            .in-out-translate-fade-enter {
+                transform:translateX(31px);
+            }
+            .in-out-translate-fade-leave-active {
+                transform:translateX(-31px);
+            }
+        </style>
+    </div>
+</body>
+</html>
