@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表的交错过渡</title>
+    <script src="./velocity.min.js"></script>
+    <script src="../vue/js/vue.js"></script>
+    <style>
+        li {
+            margin: 5px 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>按姓名匹配查询</h3>
+        <input type="text" placeholder="请输入查询字符串" v-model="query">
+        <transition-group
+            name="staggered-fade"
+            tag="ul"
+            :css="false"
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @leave="leave"
+        >
+            <li
+                v-for="(item,index) in searchList"
+                v-bind:key="item.name"
+                v-bind:data-index="index"
+            >{{item.className}}-------{{item.name}}</li>
+        </transition-group>
+    </div>
+    <script type="text/javascript">
+        var myVM=new Vue({
+            el:'#app',
+            data:{
+                query:'',
+                list:[
+                    {name:'Chu Jiu liang',className:"2019计算机1班"},
+                    {name:'Chen Qun',className:"2019电子信息1班"},
+                    {name:'Zhang Xia Qiun',className:"2018计算机2班"},
+                    {name:'Li Pin',className:"2018电子信息3班"},
+                    {name:'Sun Zhi yue',className:"2019大数据1班"},
+                    {name:'Huan Chen',className:"2019大数据2班"},                    
+                ]
+            },
+            computed:{
+                searchList(){
+                    // var vm=this;
+                    return this.list.filter((item)=>{
+                        return item.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
+                    });
+                }
+            },
+            method:{
+                beforeEnter(el){
+                    el.style.opacity=0;
+                    el.style.height=0;
+                },
+                enter(el,done){
+                    var delay=el.dataset.index*150;
+                    setTimeout(function(){
+                        Velocity(el,{opacity:1,height:'1.6em'},{complete:done})//最后一个done应该是指在动画结束之后调用的函数；
+                    },delay);
+                },
+                leave(el,done){
+                    var delay=el.dataset.index*150;//我感觉和直接全部设置为150没区别；
+                    setTimeout(function(){
+                        Velocity(el,{opacity:0,height:0},{complete:done})
+                    },delay);
+                }
+            }   
+        });
+    </script>
+</body>
+</html>
