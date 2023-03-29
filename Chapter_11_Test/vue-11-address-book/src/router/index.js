@@ -19,7 +19,8 @@ export default new Router({
   routes: [
     {
       path:'/',
-      redirect:'/home/register'
+      // redirect:'/home/register'
+      redirect:'/contacts/'
     },
     {
       path: '/home',

@@ -1,0 +1,55 @@
+#search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    padding: 50px 20px 20px 200px;
+}
+
+.search {
+    height: 50px;
+    width: 800px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    overflow-x: hidden;
+}
+.search input {
+    height: 100%;
+    width: 745px;
+    border: none;
+    font-size: 17px;
+}
+.search span {
+    float: right;/*使用float属性的时候，会默认元素是block属性*/
+    height: 100%;
+    width: 50px;
+    font-size: 20px;
+    /* vertical-align: middle;因为不是内联样式inline所以这个属性其实也没用 */
+    text-align: center;
+    padding-top: 14px;
+    border-left: 1px solid #eee;
+}
+.all,.none{
+    font-size: 12px;
+}
+.select {
+    font-size: 15px;
+}
+.select input {
+    margin-left: 10px;
+}
+.arrow {
+    position: fixed;
+    right: 50px;
+    bottom: 120px;
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    background-color: #eee;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 10px;
+}
+.arrow i {
+    color: #fff;
+}
