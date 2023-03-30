@@ -51,8 +51,8 @@
 </template>
 
 <script>
-// import qs from 'qs';
-// import {mapActions} from 'vuex';
+import qs from 'qs';
+import {mapActions} from 'vuex';
 
 export default {
   data(){
@@ -72,7 +72,7 @@ export default {
     }
   },
   methods: {
-    // ...mapActions(['register']),
+    ...mapActions(['register']),
     addToSql(){
       this.nameIn=(this.own.name=='' || /[^\w\u4E00-\u9FA5]/g.test(this.own.name)) ? false:true;//判断输入的名称是不是符合规范
       this.telIn=(!this.own.tel.length) ? false:true;
@@ -84,7 +84,7 @@ export default {
         setTimeout(()=>{
           this.result=true;
           this.icon=false;
-          // this.register(this.own);
+          this.register(this.own);
           if(sessionStorage.register && sessionStorage.register == 1){
             this.req=true;
             this.own.name='';

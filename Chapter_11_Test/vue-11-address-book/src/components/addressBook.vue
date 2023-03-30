@@ -5,7 +5,7 @@
             <img src="../assets/img/logo.png" alt="logo">
         </div>
         <div class="welcome">
-            <span class="name">Chen Weijie<!--{{ own.name }}--></span>，欢迎您！
+            <span class="name">{{ own.name }}</span>，欢迎您！
             <div class="img">
                 <img src="../assets/img/profile.jpg" alt="profile">
             </div>
@@ -29,18 +29,17 @@
                 </router-link>
             </li>
         </ul>
-        <div class="out"><i class="fa-solid fa-gear"></i>退出登录</div>
+        <div class="out" @click="out"><i class="fa-solid fa-gear"></i>退出登录</div>
     </div>
     <div class="rside">
-        <router-view items="1">zheliyoudongxi</router-view>
-        <!-- 这些属性是什么意思？？？ -->
-        <!-- <router-view :items="items" :own="own" @remove="removeItem" @add="addItem" @change="changeItem" @changeOwn="changeOwn"></router-view> -->
+        <!-- 这些属性是什么意思？？？ 后面几个传的都是函数-->
+        <router-view :items="items" :own="own" @remove="removeItem" @add="addItem" @change="changeItem" @changeOwn="changeOwn"></router-view>
     </div>
   </div>
 </template>
 
 <script>
-// import {mapActions,mapState} from 'vuex';
+import {mapActions,mapState} from 'vuex';
 
 export default {
   data(){
@@ -48,35 +47,35 @@ export default {
         clickId:1
     }
   },
-//   computed: mapState({
-//     own:state=>state.contacts.own,
-//     items:state=>state.contacts.items
-//   }),
+  computed: mapState({//这里的写法要学习学习！！！
+    own:state=>state.contacts.own,
+    items:state=>state.contacts.items
+  }),
   beforeCreate(){
-    // this.$store.dispatch('userInit');
+    this.$store.dispatch('userInit');//这里用userInit是因为mapAction没有弄出来；
   },
   methods: {
-    // ...mapActions([
-    //     'signOut',
-    //     'userAdd',
-    //     'userRemove',
-    //     'userChange',
-    //     'ownChange'
-    // ]),
+    ...mapActions([//为什么在addressBook这个父组件就解构出来，然后通过属性传参的方式将这些函数传到子组件中？
+        'signOut',
+        'userAdd',
+        'userRemove',
+        'userChange',
+        'ownChange'
+    ]),
     addItem(item){
-        // this.userAdd(item);
+        this.userAdd(item);
     },
     removeItem(id){
-        // this.userRemove(id);
+        this.userRemove(id);
     },
     changeItem(obj){
-        // this.userChange(obj);
+        this.userChange(obj);
     },
     changeOwn(obj){
-        // this.ownChange(obj);
+        this.ownChange(obj);
     },
     out(){
-        // this.signOut();
+        this.signOut();
         this.$router.replace('/home/login');
     }
   }

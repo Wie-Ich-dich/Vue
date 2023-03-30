@@ -29,6 +29,10 @@
     padding-top: 14px;
     border-left: 1px solid #eee;
 }
+#search .ul {
+    padding-left: 100px;
+}
+
 .all,.none{
     font-size: 12px;
 }

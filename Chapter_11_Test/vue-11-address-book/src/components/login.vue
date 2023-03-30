@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import {mapActions} from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
   data(){
@@ -26,15 +26,15 @@ export default {
     }
   },
   methods: {
-    // ...mapActions(['signIn']),
+    ...mapActions(['signIn']),
     login(){
       this.icon=true;
       this.req=false;
       setTimeout(()=>{
-        // this.signIn({
-        //   name:this.name,
-        //   psw:this.psw
-        // });
+        this.signIn({
+          name:this.name,
+          psw:this.psw
+        });
         if(sessionStorage.login && sessionStorage.login==1){
           this.$router.replace('/contacts');
           this.icon=false;

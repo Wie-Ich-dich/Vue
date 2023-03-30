@@ -2,11 +2,10 @@
   <div class="li">
     <div v-if="show">
       <div class="text">
-        <img src="../assets/img/profile.jpg" alt="">
-        <!-- <img :src="item.imgSrc" alt="userprofile"/> -->
+        <img :src="item.imgSrc" alt="userprofile"/>
         <div>
-          <h1 class="name">陈炜杰<!--{{ item.name }}--></h1>
-          <p class="tel">18851162708<!--{{ item.tel }}--></p>
+          <h1 class="name">{{ item.name }}</h1>
+          <p class="tel">{{ item.tel }}</p>
         </div>
       </div>
       <button class="edit" @click="show=false"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -14,8 +13,7 @@
     </div>
     <div v-else>
       <div class="text">
-        <img src="../assets/img/profile.jpg" alt="">
-        <!-- <img :src="item.imgSrc" alt="userprofile"/> -->
+        <img :src="item.imgSrc" alt="userprofile"/>
         <div>
           <input type="text" class="name" v-model="name"/>
           <input type="text" class="tel" v-model="tel"/>
@@ -40,6 +38,8 @@ export default {
     };
   },
   methods: {
+    //这里几个方法都是通过emit触发事件，这和父组件那边传的函数有关；
+    //信息卡里面如果点击了垃圾桶标识，就会执行这个函数，然后触发remove事件，父组件notes接收到了之后又触发上一级的remove事件；
     toRemove(){
       this.$emit('remove',this.item.id);
     },
