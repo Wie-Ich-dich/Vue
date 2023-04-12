@@ -1,0 +1,19 @@
+* {
+    box-sizing: content-box;
+}
+html {
+    font-size: 10px;
+    margin: 0px;
+    height: 100vh;
+}
+body {
+    margin: 0px auto;
+    height: 100vh;
+    background-color: #555;
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    overflow-y: hidden;
+}
+.container {
+    height: 100%;
+    width: 100%;
+}
