@@ -18,7 +18,15 @@ import {
   Input,
   Form,
   FormItem,
-  Button
+  Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  Icon,
+  DatePicker,
+  Select,
+  Option,
+  Col
+
 } from 'element-ui'
 import SIdentify from './components/page/Identify' //验证码组件
 import 'babel-polyfill' //让各个版本的js代码更加兼容；babel的补充插件；
@@ -34,6 +42,13 @@ Vue.use(Input);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Button);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
+Vue.use(Icon);
+Vue.use(Select);
+Vue.use(Option);
+Vue.use(Col);
+Vue.use(DatePicker);
 window.axios=require('axios').default;//这里别忘了.default这个后缀，不然会报错；
 window.axios.defaults.headers.common['X-Requested-With']='XMLHttpRequest';
 Vue.prototype.$http=window.axios;

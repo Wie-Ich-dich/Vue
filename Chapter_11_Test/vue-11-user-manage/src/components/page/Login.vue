@@ -160,7 +160,7 @@ export default {
 }
 .code {
   width: 112px;
-  height: 35px;
+  height: 45px;
   border: 1px solid #ccc;
   float: right;
   border-radius: 2px;
