@@ -7,8 +7,9 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect:'/login'
+      // redirect:'/login'
       // redirect:'/readme'
+      redirect:'/register-success'
     },
     {
       path:'/readme',
