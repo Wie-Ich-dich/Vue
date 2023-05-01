@@ -54,6 +54,23 @@ window.axios.defaults.headers.common['X-Requested-With']='XMLHttpRequest';
 Vue.prototype.$http=window.axios;
 Vue.config.productionTip = false;
 
+router.beforeEach((to,from,next)=>{
+  console.log(to);
+  console.log(from);
+  if(to.meta.logined){//判断这个页面是不是需要登录才能访问
+    if(sessionStorage.login == 1){
+      next();
+    }else{
+      next({
+        path:'/login'
+      });
+    }
+    next();
+  }else{
+    next();
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -61,3 +78,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+

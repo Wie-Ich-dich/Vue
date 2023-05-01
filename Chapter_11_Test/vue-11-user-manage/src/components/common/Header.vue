@@ -41,9 +41,10 @@ export default {
         sessionStorage.removeItem('ms_userId');
         sessionStorage.removeItem('ms_user');
         sessionStorage.removeItem('user_sex');
-        this.$route.push('/login');
+        sessionStorage.login=0;
+        this.$router.push('/login');
       }else if(command=='userCenter'){
-        this.$route.push('/userCenter')
+        this.$router.push('/userCenter')
       }
     },
   }
@@ -58,6 +59,7 @@ export default {
   font-size: 22px;
   line-height: 70px;
   color: #fff;
+  background-color: #555;
 }
 .header .logo {
   float: left;
@@ -85,6 +87,11 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  border: 1px solid #fff;
+}
+.user-info h1 {
+  padding-top: 8px;
+  margin: 0;
 }
 el-dropdown-menu el-dropdown-item {
   text-align: center;

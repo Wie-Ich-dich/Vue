@@ -2,7 +2,7 @@
   <div>
     <div class="crumbs crumbs-register">
       <el-breadcrumb separator="/" class="register-title">
-        <el-breadcumb-item><i class="el-icon-setting"></i>注册成功</el-breadcumb-item>
+        <el-breadcrumb-item><i class="el-icon-setting"></i>注册成功</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="userContent">

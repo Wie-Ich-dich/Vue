@@ -4,7 +4,7 @@
     <v-sidebar></v-sidebar>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view>内容框界面</router-view>
+        <router-view>内容框界面</router-view> 
       </transition>
     </div>
   </div>
@@ -21,3 +21,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.content {
+  position: absolute;
+  top: 70px;
+  padding-left: 250px;
+  padding-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+</style>

@@ -3,13 +3,16 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 export default new Router({
   routes: [
     {
       path: '/',
-      // redirect:'/login'
-      // redirect:'/readme'
-      redirect:'/register-success'
+      redirect:'/login'
     },
     {
       path:'/readme',
@@ -17,21 +20,36 @@ export default new Router({
       children:[
         {
           path:'/',
-          component:resolve=>require(['../components/page/Readme.vue'],resolve)
+          component:resolve=>require(['../components/page/Readme.vue'],resolve),
+          meta:{
+            logined:true
+          }
         },
         {
           path:'/userCenter',
-          component:resolve=>require(['../components/page/UserCenter.vue'],resolve)
+          component:resolve=>require(['../components/page/UserCenter.vue'],resolve),
+          meta:{
+            logined:true
+          }
         },
         {
           path:'/modifyUser',
-          component:resolve=>require(['../components/page/ModifyUser.vue'],resolve)
+          component:resolve=>require(['../components/page/ModifyUser.vue'],resolve),
+          meta:{
+            logined:true
+          }
         },{
           path:'/modifyPassword',
-          component:resolve=>require(['../components/page/ModifyPassword.vue'],resolve)
+          component:resolve=>require(['../components/page/ModifyPassword.vue'],resolve),
+          meta:{
+            logined:true
+          }
         },{
           path:'/success',
-          component:resolve=>require(['../components/page/Success.vue'],resolve)
+          component:resolve=>require(['../components/page/Success.vue'],resolve),
+          meta:{
+            logined:true
+          }
         },
       ]
     },

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-var Util=require('util');
+import Util from '../../utils/utils';
 export default {
     data() {
       //自定义校验规则
@@ -177,7 +177,8 @@ export default {
   width: 400px;
 }
 .el-form-item {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #606266;
 }
-/* 这里由于背景颜色和form中的label文字颜色很相近，然后我想改label颜色，但是没有办法只改一个组件中的，所以我直接在主题中进行了更改 */
+/* 这里由于背景颜色和form中的label文字颜色很相近，然后我想改label颜色，但是没有办法只改一个组件中的，所以我直接在主题中进行了更改 ，但其实还可以在el-from-item里面改*/
 </style>

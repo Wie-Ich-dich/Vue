@@ -1,5 +1,5 @@
 <template>
-  <div id=''>Success
+  <div id=''>修改成功 Success！！
   </div>
 </template>
 

@@ -3,8 +3,8 @@
     <div class="ms-title">用户登录管理系统</div>
     <div class="ms-login">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
-        <div v-if="errorInfo">
-          <span>{{ errInfo }}</span>
+        <div style="height: 15px;">
+          <span v-show="errorInfo">{{ errInfo }}</span>
         </div>
         <el-form-item prop="name">
           <el-input v-model="ruleForm.name" placeholder="账号"></el-input>
@@ -77,6 +77,7 @@ export default {
                   self.errorInfo=true;
                   self.errInfo='密码错误';
                 }else if(response.status == 200){
+                  sessionStorage.login=1;
                   self.$router.push('/readme');
                   //这里需要留意一下，发现指令式导航并不是立即执行的；而是等所在函数执行完毕；
                   sessionStorage.setItem('ms_userId',response.data[0].account);
@@ -121,6 +122,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: #555;
   /* 这里的height属性其实没有用，容器的高度还是随着里面的东西在变； 
   而且当设置position为relative，里面的东西设置为absolute的时候，高度就变成0了；
   */
@@ -138,15 +140,17 @@ export default {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 400px;
+  width: 460px;
   border-radius: 5px;
-  height: 260px;
-  margin: -170px 0 0 -240px;
-  padding: 60px 40px 40px;
+  height: 360px;
+  margin: -180px 0 0 -230px;
+  padding: 45px 40px 40px;
   background: #fff;
 }
 .ms-login span {
   color: red;
+  line-height: 15px;
+  font-size: 12px;
 }
 .login-btn {
   text-align: center;

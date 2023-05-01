@@ -73,6 +73,7 @@ export default {
   top: 70px;
   bottom: 0px;
   background-color: #2E363F;
+  z-index: 999;
 }
 .sidebar>ul {
   height: 100%;
